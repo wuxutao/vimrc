@@ -75,6 +75,30 @@
  set wildmenu " command line used
  set wildmode=list:longest,full " command line used
 
+
+ if has("cscope")
+     set csprg=/usr/bin/cscope              "指定用来执行 cscope 的命令
+     set csto=1                             "先搜索tags标签文件，再搜索cscope数据库
+     set cst                                "使用|:cstag|(:cs find g)，而不是缺省的:tag
+     set nocsverb                           "不显示添加数据库是否成功
+     " add any database in current directory
+     if filereadable("cscope.out")
+         cs add cscope.out
+         "添加cscope数据库
+     elseif filereadable("../cscope.out")
+         cs add ../cscope.out
+     elseif filereadable("../../cscope.out")
+         cs add ../../cscope.out
+     elseif filereadable("../../../cscope.out")
+         cs add ../../../cscope.out
+     endif
+     set csverb
+     "显示添加成功与否
+ endif
+    
+
+
+
  set rtp+=~/.vim/bundle/vundle/
  call vundle#rc()
 
@@ -107,6 +131,16 @@
  Bundle 'bufexplorer.zip'
  Bundle 'The-NERD-Commenter'
  Bundle 'DoxygenToolkit.vim'
+ Bundle 'a.vim'
+ Bundle 'neocomplcache'
+ Bundle 'OmniCppComplete'
+ Bundle 'javascript.vim'
+ Bundle 'jsbeautify'
+ Bundle 'xml.vim'
+ Bundle 'python.vim'
+ Bundle 'css.vim'
+ Bundle 'JSON.vim'
+ Bundle 'Markdown'
  
  filetype plugin indent on     " required!
  
@@ -127,6 +161,8 @@
  "Doxygentoolkit
  let g:DoxygenToolkit_authorName="Ark" 
  let g:DoxygenToolkit_licenseTag="MIT"
+
+ let g:neocomplcache_enable_at_startup = 1
 
  " cscope - code browse {{{2
  nmap <silent> <leader>ss :exe 'cs find s ' . expand("<cword>")<cr>
