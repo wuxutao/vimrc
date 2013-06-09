@@ -144,7 +144,8 @@
  
  filetype plugin indent on     " required!
  
- nmap <F4> :TagbarToggle<CR>
+ "nmap <F4> :TagbarToggle<CR>
+ nmap <slient> <leader>l :TagbarToggle<cr>
   
  " NERD_tree.vim - File tree explorer {{{2
  " <F3> - open and close NERDTree window
@@ -152,7 +153,8 @@
  let g:NERDTreeWinSize = 34
  let g:NERDTreeShowLineNumbers = 1
  let g:NERDTreeQuitOnOpen = 1
- nmap <F3> :NERDTreeToggle<cr>
+ "nmap <F3> :NERDTreeToggle<cr>
+ nmap <slient> <leader>n :NERDTreeToggle<cr>
 
  "close auto_load mapping
  let g:autocscope_menus=0
