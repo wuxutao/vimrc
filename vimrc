@@ -21,7 +21,7 @@
  set number
 
  set foldenable      " 允许折叠  
- set foldmethod=marker   " {折叠
+ set foldmethod=indent" {折叠
  "默认情况下不折叠
  set foldlevel=99 
 
@@ -62,7 +62,7 @@
  set tabstop=4 " number of spaces to <Tab>
  set softtabstop=4 " number of spaces to delete <Tab>
  set shiftwidth=4 " number of spaces when use "<<" and ">>" commands
- set textwidth=80 " max chars in one line
+ "set textwidth=80 " max chars in one line
  " Bell settings
  set noerrorbells " no error bell
  set novisualbell " no visual bell
@@ -134,13 +134,14 @@
  Bundle 'a.vim'
  Bundle 'neocomplcache'
  Bundle 'OmniCppComplete'
- Bundle 'javascript.vim'
+ "Bundle 'javascript.vim'
  Bundle 'jsbeautify'
  Bundle 'xml.vim'
  Bundle 'python.vim'
- Bundle 'css.vim'
+ "Bundle 'css.vim'
  Bundle 'JSON.vim'
  Bundle 'Markdown'
+ Bundle 'SuperTab'
  
  filetype plugin indent on     " required!
  
