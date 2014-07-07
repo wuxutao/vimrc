@@ -6,7 +6,19 @@
  " KEY BINDINGS: {{{1
  " Set mapleader
  let mapleader=","
- 
+
+
+ "wuxt python all-open paythonogen
+ "call pathogen#infect()
+ "call pathogen#helptags()
+
+
+ "osx setting 
+ syntax enable
+ set background=dark
+ colorscheme solarized
+
+
  "开启语法高亮
  "syntax on
  ""依文件类型设置自动缩进
@@ -77,7 +89,7 @@
 
 
  if has("cscope")
-     set csprg=/usr/bin/cscope              "指定用来执行 cscope 的命令
+     set csprg=/usr/local/bin/cscope              "指定用来执行 cscope 的命令
      set csto=1                             "先搜索tags标签文件，再搜索cscope数据库
      set cst                                "使用|:cstag|(:cs find g)，而不是缺省的:tag
      set nocsverb                           "不显示添加数据库是否成功
@@ -142,20 +154,63 @@
  Bundle 'JSON.vim'
  Bundle 'Markdown'
  Bundle 'SuperTab'
- 
+ Bundle 'django.vim'
+ Bundle 'cespare/vim-golang'
+ Bundle 'Blackrush/vim-gocode'
+ "Bundle 'majutsushi/tagbar'
+ Bundle 'dgryski/vim-godef'
+ Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+ Bundle 'git://github.com/klen/python-mode.git'
+
+
  filetype plugin indent on     " required!
- 
+
+ "wuxt python all-open paythonogen
+ call pathogen#infect()
+ call pathogen#helptags()
+
  "nmap <F4> :TagbarToggle<CR>
  nmap <silent> <leader>l :TagbarToggle<cr>
-  
+ "go tag
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+    \ }
+
  " NERD_tree.vim - File tree explorer {{{2
  " <F3> - open and close NERDTree window
  let g:NERDTreeWinPos = "left"
  let g:NERDTreeWinSize = 34
  let g:NERDTreeShowLineNumbers = 1
- let g:NERDTreeQuitOnOpen = 1
+ let g:NERDTreeQuitOnOpen = 0 
  "nmap <F3> :NERDTreeToggle<cr>
  nmap <silent> <leader>n :NERDTreeToggle<cr>
+ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") &&b:NERDTreeType == "primary") | q | endif
+ "autocmd vimenter * NERDTree
+
 
  "close auto_load mapping
  let g:autocscope_menus=0
@@ -176,6 +231,11 @@
  nmap <silent> <leader>sf :exe 'cs find f ' . expand("<cfile>")<cr>
  nmap <silent> <leader>si :exe 'cs find i ' . expand("<cfile>")<cr>
  nmap <silent> <leader>sd :exe 'cs find d ' . expand("<cword>")<cr>
+
+ "go format when save a go file
+ "autocmd BufWritePre*.go :Fmt
+ autocmd FileType go autocmd BufWritePre <buffer> Fmt 
+ 
  "
  " Brief help
  " :BundleList          - list configured bundles
